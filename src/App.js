@@ -9,6 +9,8 @@ import Login from "./Components/Authentication/Login/Login";
 import InventoryDetails from "./Components/ManageInventories/InventoryDetails/InventoryDetails";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Signup from "./Components/Authentication/Signup/Signup";
+import RequireAuth from "./Components/Authentication/RequireAuth/RequireAuth";
 
 function App() {
     return (
@@ -16,9 +18,25 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/manage-inventories" element={<Inventories />} />
+                <Route
+                    path="/manage-inventories"
+                    element={
+                        <RequireAuth>
+                            <Inventories />
+                        </RequireAuth>
+                    }
+                />
+                <Route
+                    path="/inventory/:inventoryID"
+                    element={
+                        <RequireAuth>
+                            <InventoryDetails />
+                        </RequireAuth>
+                    }
+                />
+
                 <Route path="/login" element={<Login />} />
-                <Route path="/inventory/:inventoryID" element={<InventoryDetails />} />
+                <Route path="/signup" element={<Signup />} />
 
                 <Route path="*" element={<NotFound />} />
             </Routes>
