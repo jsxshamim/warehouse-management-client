@@ -1,0 +1,19 @@
+.feature {
+    transition-duration: 0.8s;
+    position: relative;
+}
+.feature::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-image: linear-gradient(rgba(246, 133, 41, 0.137), rgba(114, 88, 219, 0.126));
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+.feature:hover::after {
+    opacity: 1;
+    border-radius: 8px;
+}
