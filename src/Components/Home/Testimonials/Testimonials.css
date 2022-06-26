@@ -1,0 +1,12 @@
+.testimonial-text {
+    background-image: url("../../../Images/quote-svgrepo-com.png");
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: top 50px left;
+    padding-left: 20px;
+}
+
+.testimonial {
+    background-image: url("../../../Images//testimonial-bg.png");
+    background-size: contain;
+}
