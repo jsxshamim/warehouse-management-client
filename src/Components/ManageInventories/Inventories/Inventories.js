@@ -8,11 +8,13 @@ import auth from "../../../Utilities/Firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Pagination from "../../Shared/Pagination/Pagination";
 
 const Inventories = () => {
-    const { inventories, setInventories } = useInventories(`http://localhost:5000/inventories`);
+    const { inventories, setInventories } = useInventories();
     const [show, setShow] = useState(false);
     const [user, loading] = useAuthState(auth);
+    const [size, setSize] = useState(5);
 
     const {
         register,
@@ -54,20 +56,21 @@ const Inventories = () => {
                     <h1 className="text-4xl font-bold text-title section-title mb-5">Manage All Inventory Items</h1>
                 </div>
                 <div className=" bg-white shadow rounded">
-                    <div className="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full">
-                        <div className="w-full lg:w-1/3 flex flex-col lg:flex-row items-start lg:items-center">
-                            <p className="text-base text-gray-600" id="page-view">
-                                Viewing 1 - 20 of 60
-                            </p>
+                    <div className="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start w-full">
+                        <div className="flex items-center gap-2 ">
+                            Show
+                            <select className="relative inline-flex items-center px-4 py-2 border text-sm font-medium" onChange={(e) => setSize(e.target.value)} name="page" id="page">
+                                <option defaultValue="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                            </select>
                         </div>
-                        <div className="w-full lg:w-2/3 flex flex-col lg:flex-row items-start lg:items-center justify-end">
-                            <div className="lg:ml-6 flex items-center">
-                                <button onClick={() => setShow(true)} className="rounded flex gap-3 bg-secondary text-white px-5 py-2 items-center text-md">
-                                    {" "}
-                                    <FontAwesomeIcon className="text-white" icon={faPlus} /> New Inventory
-                                </button>
-                            </div>
-                        </div>
+
+                        <Pagination size={size} setInventories={setInventories} />
+
+                        <button onClick={() => setShow(true)} className="rounded flex gap-3 bg-secondary text-white px-5 py-2 items-center text-md">
+                            <FontAwesomeIcon className="text-white" icon={faPlus} /> New Inventory
+                        </button>
                     </div>
 
                     <div className="w-full">

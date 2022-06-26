@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../Utilities/Firebase.init";
 import { toast } from "react-toastify";
 import getDate from "../../../Utilities/getDate";
+import { Link } from "react-router-dom";
 
 const Inventory = ({ inventory, handleDeleteInventory }) => {
     const [show, setShow] = useState(false);
@@ -53,7 +54,9 @@ const Inventory = ({ inventory, handleDeleteInventory }) => {
                         <div className="h-16 w-16 border p-1">
                             <img src={inventory?.picture} alt="" className="h-full w-full overflow-hidden shadow" />
                         </div>
-                        <p className="ml-2 text-paragraph">{inventory?.name}</p>
+                        <Link to={`/inventory/${inventory?._id}`} className="ml-2 text-paragraph underline">
+                            {inventory?.name}
+                        </Link>
                     </div>
                 </td>
                 <td className="text-left text-paragraph">{inventory?.description.slice(0, 20)}...</td>

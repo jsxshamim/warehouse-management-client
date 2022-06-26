@@ -8,7 +8,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 import useToken from "../../../Hooks/useToken";
 
 const Login = () => {
@@ -28,7 +27,7 @@ const Login = () => {
         formState: { errors },
     } = useForm();
 
-    const { token } = useToken(user);
+    const { token } = useToken(user || googleUser);
 
     const handleSignIn = async (inputData) => {
         const { email, password } = inputData;
@@ -36,8 +35,8 @@ const Login = () => {
         reset();
     };
 
-    if (error) {
-        toast.error(error.message);
+    if (error || googleError) {
+        toast.error(error.message || googleError.message);
     }
 
     if (token) {

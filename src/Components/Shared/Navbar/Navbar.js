@@ -12,6 +12,10 @@ const Navbar = () => {
     const [show, setShow] = useState(false);
     const [user, loading] = useAuthState(auth);
 
+    const activeStyle = {
+        color: "#F68629",
+    };
+
     return (
         <section>
             <nav className={`relative flex md:fixed md:w-full flex-wrap items-center justify-between z-40 py-3 bg-white shadow-lg`}>
@@ -31,29 +35,29 @@ const Navbar = () => {
                     <div className={"lg:flex flex-grow items-center" + (navbarOpen ? " flex" : " hidden")} id="example-navbar-danger">
                         <ul className="flex flex-col gap-5 items-center lg:flex-row list-none lg:ml-auto">
                             <li className="nav-item">
-                                <NavLink className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/">
+                                <NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/">
                                     Home
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/features">
+                                <NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/features">
                                     Features
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/testimonials">
+                                <NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/testimonials">
                                     Testimonials
                                 </NavLink>
                             </li>
                             {user && (
                                 <li className="nav-item">
-                                    <NavLink className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/manage-inventories">
+                                    <NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/manage-inventories">
                                         Manage Inventory
                                     </NavLink>
                                 </li>
                             )}
                             <li className="nav-item">
-                                <NavLink className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-title hover:opacity-75" to="/blog">
+                                <NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-title hover:opacity-75" to="/blog">
                                     Blog
                                 </NavLink>
                             </li>
@@ -97,7 +101,7 @@ const Navbar = () => {
                                 </li>
                             ) : (
                                 <li className="nav-item">
-                                    <NavLink className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-title hover:opacity-75" to="/login">
+                                    <NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-title hover:opacity-75" to="/login">
                                         <FontAwesomeIcon className="mr-3" icon={faSignIn} /> Login
                                     </NavLink>
                                 </li>
