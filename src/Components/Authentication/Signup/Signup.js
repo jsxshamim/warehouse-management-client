@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
-import auth from "../../../Utilities/Firebase.init";
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from "react-firebase-hooks/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import auth from "../../../Utilities/Firebase.init";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import ProfilePic from "../../../Images/profile_av.svg";
+import { toast } from "react-toastify";
 
-const Login = () => {
+const Signup = () => {
     const [showPass, setShowPass] = useState(false);
-    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile] = useUpdateProfile(auth);
     const [signInWithGoogle, googleUser, , googleError] = useSignInWithGoogle(auth);
 
-    const navigate = useNavigate();
     const location = useLocation();
-
+    const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/";
 
     const {
@@ -26,34 +27,49 @@ const Login = () => {
         formState: { errors },
     } = useForm();
 
-    const handleSignIn = async (data) => {
-        const { email, password } = data;
-        await signInWithEmailAndPassword(email, password);
-        reset();
+    const handleCreateAccount = async (data) => {
+        const { name, email, password } = data;
+        if (data) {
+            await createUserWithEmailAndPassword(email, password);
+            await updateProfile({ displayName: name, photoURL: ProfilePic });
+            reset();
+        }
     };
 
-    if (error) {
+    if (error || googleError) {
         toast.error(error.message);
     }
-
-    if (user) {
+    if (user || googleUser) {
         navigate(from, { replace: true });
+        toast.success("Your have logged in your account");
     }
 
     return (
         <section className="container mx-auto pt-24">
             <div className="xl:px-20 md:px-10 sm:px-6 px-4 md:py-12 py-9 2xl:mx-auto md:flex items-center justify-center">
                 <div className="bg-white shadow-lg rounded xl:w-1/3 lg:w-5/12 md:w-1/2 w-full lg:px-10 px-6 sm:py-10  py-6">
-                    <form onSubmit={handleSubmit(handleSignIn)}>
-                        <p className="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800">Login to your account</p>
+                    <form onSubmit={handleSubmit(handleCreateAccount)}>
+                        <p className="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800">Create your account</p>
                         <p className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500">
-                            Don't have account?{" "}
-                            <Link to="/signup" className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none text-primary cursor-pointer">
-                                {" "}
-                                Sign up here
+                            Already a user?{" "}
+                            <Link to="/login" className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none text-primary cursor-pointer">
+                                Login here
                             </Link>
                         </p>
 
+                        <div className="mt-8">
+                            <label htmlFor="name" className="text-sm font-medium leading-none text-gray-800">
+                                Full Name
+                            </label>
+                            <input
+                                {...register("name", { required: true })}
+                                type="text"
+                                id="name"
+                                className="bg-gray-200 border rounded text-xs font-medium leading-none placeholder-gray-800 text-gray-800 py-3 w-full pl-3 mt-2"
+                                placeholder="Type your name "
+                            />
+                            {errors.name && <span className="text-red-500 text-sm">Your name is required</span>}
+                        </div>
                         <div className="mt-8">
                             <label htmlFor="email" className="text-sm font-medium leading-none text-gray-800">
                                 Email
@@ -80,7 +96,9 @@ const Login = () => {
                             {errors.password && <span className="text-red-500 text-sm">Your password is required</span>}
                         </div>
                         <div className="mt-8">
-                            <button className="text-sm font-semibold text-white transition bg-secondary border rounded hover:bg-secondary/90 py-4 w-full">{loading ? <FontAwesomeIcon spin icon={faSpinner} /> : "Login"}</button>
+                            <button type="submit" className="text-sm font-semibold text-white transition bg-secondary border rounded hover:bg-secondary/90 py-4 w-full">
+                                {loading ? <FontAwesomeIcon spin icon={faSpinner} /> : "Create Account "}
+                            </button>
                         </div>
                     </form>
 
@@ -90,7 +108,7 @@ const Login = () => {
                         <hr className="w-full bg-gray-400" />
                     </div>
 
-                    <button onClick={async () => await signInWithGoogle()} className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 p-3 border rounded-lg border-gray-700 flex items-center w-full hover:bg-gray-100">
+                    <button onClick={() => signInWithGoogle()} className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 p-3 border rounded-lg border-gray-700 flex items-center w-full hover:bg-gray-100">
                         <svg width={19} height={20} viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M18.9892 10.1871C18.9892 9.36767 18.9246 8.76973 18.7847 8.14966H9.68848V11.848H15.0277C14.9201 12.767 14.3388 14.1512 13.047 15.0812L13.0289 15.205L15.905 17.4969L16.1042 17.5173C17.9342 15.7789 18.9892 13.221 18.9892 10.1871Z"
@@ -121,4 +139,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Signup;
