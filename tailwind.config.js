@@ -8,10 +8,17 @@ module.exports = {
                 sm: "2rem",
                 lg: "4rem",
                 xl: "5rem",
-                "2xl": "6rem",
+                "2xl": "8rem",
             },
         },
-        extend: {},
+        extend: {
+            colors: {
+                primary: "#F68629",
+                secondary: "#7258db",
+                paragraph: "#334155",
+                title: "#212529",
+            },
+        },
     },
     plugins: [],
 };

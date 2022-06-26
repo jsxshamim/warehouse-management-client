@@ -1,18 +1,18 @@
 import React from "react";
-import Footer from "../../Shared/Footer/Footer";
 import Banner from "../Banner/Banner";
+import Features from "../Features/Features";
 import Pricing from "../Pricing/Pricing";
 import RecentInventories from "../RecentInventories/RecentInventories";
 import Testimonials from "../Testimonials/Testimonials";
 
 const Home = () => {
     return (
-        <main>
+        <main className="relative">
             <Banner />
             <RecentInventories />
+            <Features />
             <Pricing />
             <Testimonials />
-            <Footer />
         </main>
     );
 };
