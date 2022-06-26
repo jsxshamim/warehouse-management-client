@@ -36,10 +36,22 @@ const Navbar = () => {
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/manage-inventories">
-                                    Manage Inventory
+                                <NavLink className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/features">
+                                    Features
                                 </NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/testimonials">
+                                    Testimonials
+                                </NavLink>
+                            </li>
+                            {user && (
+                                <li className="nav-item">
+                                    <NavLink className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-gray-800 hover:opacity-75" to="/manage-inventories">
+                                        Manage Inventory
+                                    </NavLink>
+                                </li>
+                            )}
                             <li className="nav-item">
                                 <NavLink className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-title hover:opacity-75" to="/blog">
                                     Blog

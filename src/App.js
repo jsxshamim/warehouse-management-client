@@ -11,6 +11,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Signup from "./Components/Authentication/Signup/Signup";
 import RequireAuth from "./Components/Authentication/RequireAuth/RequireAuth";
+import ForgotPassword from "./Components/Authentication/ForgotPassword/ForgotPassword";
+import OurFeatures from "./Components/OurFeatures/OurFeatures";
+import OurTestimonials from "./Components/OurTestimonials/OurTestimonials";
+import Blog from "./Components/Blog/Blog";
+import MyInventories from "./Components/MyInventories/MyInventories";
 
 function App() {
     return (
@@ -35,8 +40,22 @@ function App() {
                     }
                 />
 
+                <Route
+                    path="/my-inventories"
+                    element={
+                        <RequireAuth>
+                            <MyInventories />
+                        </RequireAuth>
+                    }
+                />
+
+                <Route path="/features" element={<OurFeatures />} />
+                <Route path="/testimonials" element={<OurTestimonials />} />
+                <Route path="/blog" element={<Blog />} />
+
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/forgot" element={<ForgotPassword />} />
 
                 <Route path="*" element={<NotFound />} />
             </Routes>

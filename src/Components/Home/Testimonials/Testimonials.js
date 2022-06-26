@@ -25,7 +25,7 @@ const Testimonials = () => {
         prevArrow: <SamplePrevArrow />,
     };
     return (
-        <section className="container mx-auto testimonial py-20">
+        <section id="testimonials" className="container mx-auto testimonial py-20">
             <div className="section-top text-center pb-20">
                 <h1 className="text-4xl font-bold text-title section-title mb-5">What Our Clients Say?</h1>
                 <p>Read what my clients are saying to whom i've helped to make a difference in there life.</p>

@@ -6,7 +6,7 @@ import RecentInventory from "./RecentInventory";
 const RecentInventories = () => {
     const navigate = useNavigate();
 
-    const { inventories } = useInventories();
+    const { inventories } = useInventories("http://localhost:5000/inventories");
 
     return (
         <section className="container mx-auto py-20 shadow-lg">
@@ -15,7 +15,7 @@ const RecentInventories = () => {
             </div>
 
             <div className="inventories grid grid-cols-3 gap-10 mb-14">
-                {inventories.map((inventory) => (
+                {inventories.slice(0, 6).map((inventory) => (
                     <RecentInventory key={inventory._id} inventory={inventory} />
                 ))}
             </div>

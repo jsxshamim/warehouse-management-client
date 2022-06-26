@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 const Signup = () => {
     const [showPass, setShowPass] = useState(false);
-    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile] = useUpdateProfile(auth);
     const [signInWithGoogle, googleUser, , googleError] = useSignInWithGoogle(auth);
 

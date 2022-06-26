@@ -3,7 +3,7 @@ import "./Features.css";
 
 const Features = () => {
     return (
-        <section className="container mx-auto py-20 bg-gray-50">
+        <section id="features" className="container mx-auto py-20 bg-gray-50">
             <div className="section-top text-center pb-20">
                 <h1 className="text-4xl font-bold text-title section-title mb-5">Our Features</h1>
                 <p>Give us a try. There's nothing to install. No training manuals needed. No commitments.</p>

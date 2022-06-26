@@ -8,6 +8,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import useToken from "../../../Hooks/useToken";
 
 const Login = () => {
     const [showPass, setShowPass] = useState(false);
@@ -26,8 +28,10 @@ const Login = () => {
         formState: { errors },
     } = useForm();
 
-    const handleSignIn = async (data) => {
-        const { email, password } = data;
+    const { token } = useToken(user);
+
+    const handleSignIn = async (inputData) => {
+        const { email, password } = inputData;
         await signInWithEmailAndPassword(email, password);
         reset();
     };
@@ -36,7 +40,7 @@ const Login = () => {
         toast.error(error.message);
     }
 
-    if (user) {
+    if (token) {
         navigate(from, { replace: true });
     }
 
@@ -77,6 +81,9 @@ const Login = () => {
                                     <div id="show">{showPass ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}</div>
                                 </div>
                             </div>
+                            <Link to="/forgot" className="block text-sm text-green-500 mt-1 mb-3">
+                                forgot password?
+                            </Link>
                             {errors.password && <span className="text-red-500 text-sm">Your password is required</span>}
                         </div>
                         <div className="mt-8">
