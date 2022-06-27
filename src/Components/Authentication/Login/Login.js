@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../../Utilities/Firebase.init";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
@@ -14,6 +14,7 @@ const Login = () => {
     const [showPass, setShowPass] = useState(false);
     const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, googleUser, , googleError] = useSignInWithGoogle(auth);
+    const [signInWithFacebook, facebookUser, , facebookError] = useSignInWithFacebook(auth);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -27,7 +28,7 @@ const Login = () => {
         formState: { errors },
     } = useForm();
 
-    const { token } = useToken(user || googleUser);
+    const { token } = useToken(user || googleUser || facebookUser);
 
     const handleSignIn = async (inputData) => {
         const { email, password } = inputData;
@@ -35,7 +36,7 @@ const Login = () => {
         reset();
     };
 
-    if (error || googleError) {
+    if (error || googleError || facebookError) {
         toast.error(error.message || googleError.message);
     }
 
@@ -117,7 +118,7 @@ const Login = () => {
                         </svg>
                         <p className="text-base font-medium ml-4 text-gray-700">Continue with Google</p>
                     </button>
-                    <button className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 p-3 border rounded-lg border-gray-700 flex items-center w-full mt-4 hover:bg-gray-100">
+                    <button onClick={async () => await signInWithFacebook()} className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 p-3 border rounded-lg border-gray-700 flex items-center w-full mt-4 hover:bg-gray-100">
                         <FontAwesomeIcon className="text-[#4267B2]" icon={faFacebookF} />
                         <p className="text-base font-medium ml-4 text-gray-700">Continue with Facebook</p>
                     </button>
