@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import useInventory from "../../../Hooks/useInventory";
-import useUpdateStock from "../../../Utilities/handleStockUpdate";
+import useUpdates from "../../../Hooks/useUpdates";
 import Spinner from "../../Shared/Spinner/Spinner";
 
 const InventoryDetails = () => {
@@ -8,16 +8,16 @@ const InventoryDetails = () => {
     const { inventory, stock, setStock, loading } = useInventory(inventoryID);
     const { name, price, supplier, description, picture, _id } = inventory;
 
-    const [handleUpdateStock] = useUpdateStock();
+    const [handleUpdate] = useUpdates();
 
     const handleDelivered = () => {
-        handleUpdateStock(_id, stock - 1, setStock);
+        handleUpdate(_id, stock - 1, setStock);
     };
 
     const handleStockUpdate = (e) => {
         e.preventDefault();
 
-        handleUpdateStock(_id, parseInt(e.target.stock.value), setStock);
+        handleUpdate(_id, parseInt(e.target.stock.value), setStock);
     };
 
     return (

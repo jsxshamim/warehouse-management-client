@@ -1,10 +1,7 @@
-import { useState } from "react";
 import { toast } from "react-toastify";
 
-const useUpdateStock = () => {
-    const [success, setSuccess] = useState(false);
-
-    const handleUpdateStock = (id, stockDecrement, setStock) => {
+const useUpdates = () => {
+    const handleUpdate = (id, stockDecrement, setStock) => {
         const newStock = stockDecrement;
 
         if (newStock >= 0) {
@@ -27,18 +24,14 @@ const useUpdateStock = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                setSuccess(true);
+                toast.success("Your inventory has been updated!");
             })
             .catch((error) => {
                 toast.error(error.message);
             });
-
-        if (success) {
-            toast.success("Your inventory has been delivered!");
-        }
     };
 
-    return [handleUpdateStock, success, setSuccess];
+    return [handleUpdate];
 };
 
-export default useUpdateStock;
+export default useUpdates;
