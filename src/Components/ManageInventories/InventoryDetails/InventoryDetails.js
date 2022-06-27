@@ -1,3 +1,6 @@
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import useInventory from "../../../Hooks/useInventory";
 import useUpdates from "../../../Hooks/useUpdates";
@@ -7,17 +10,18 @@ const InventoryDetails = () => {
     const { inventoryID } = useParams();
     const { inventory, stock, setStock, loading } = useInventory(inventoryID);
     const { name, price, supplier, description, picture, _id } = inventory;
+    const [postLoading, setPostLoading] = useState(false);
 
     const [handleUpdate] = useUpdates();
 
     const handleDelivered = () => {
-        handleUpdate(_id, stock - 1, setStock);
+        handleUpdate(_id, stock - 1, setStock, setPostLoading);
     };
 
-    const handleStockUpdate = (e) => {
+    const handleStockUpdate = async (e) => {
         e.preventDefault();
-
-        handleUpdate(_id, parseInt(e.target.stock.value), setStock);
+        setPostLoading(true);
+        handleUpdate(_id, parseInt(e.target.stock.value), setStock, setPostLoading);
     };
 
     return (
@@ -70,7 +74,13 @@ const InventoryDetails = () => {
                                     </label>{" "}
                                     <div className="flex gap-5">
                                         <button className="text-white bg-secondary px-3 py-2 mt-3" type="submit">
-                                            Add Stock
+                                            {postLoading ? (
+                                                <>
+                                                    <FontAwesomeIcon spin icon={faSpinner} /> 'Adding... '
+                                                </>
+                                            ) : (
+                                                "Add Stock"
+                                            )}
                                         </button>
                                         <Link to="/manage-inventories" className="text-title font-bold bg-primary px-3 py-2 mt-3" type="submit">
                                             See All Inventories

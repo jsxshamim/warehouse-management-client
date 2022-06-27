@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
 const useUpdates = () => {
-    const handleUpdate = (id, stockDecrement, setStock) => {
+    const handleUpdate = (id, stockDecrement, setStock, setPostLoading) => {
         const newStock = stockDecrement;
 
         if (newStock >= 0) {
@@ -25,9 +25,11 @@ const useUpdates = () => {
             .then((res) => res.json())
             .then((data) => {
                 toast.success("Your inventory has been updated!");
+                setPostLoading(false);
             })
             .catch((error) => {
                 toast.error(error.message);
+                setPostLoading(false);
             });
     };
 
