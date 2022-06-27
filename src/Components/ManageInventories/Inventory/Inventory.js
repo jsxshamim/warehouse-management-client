@@ -64,7 +64,7 @@ const Inventory = ({ inventory, handleDeleteInventory }) => {
                 <td className="text-left text-paragraph">${inventory?.price}</td>
                 <td className="text-center text-paragraph">{inventory?.stock}</td>
                 <td className="text-center text-paragraph">{inventory?.supplier}</td>
-                <td className={`${inventory?.stock > 10 ? "bg-green-400 text-paragraph" : inventory?.stock <= 10 && inventory?.stock > 0 ? "bg-yellow-400 text-gray-900" : "bg-red-400 text-white"} mx-2 rounded-full block mt-7 text-center`}>
+                <td className={`${inventory?.stock > 10 ? "bg-green-400 text-paragraph" : inventory?.stock <= 10 && inventory?.stock > 0 ? "bg-yellow-400 text-gray-900" : "bg-red-400 text-white"} mx-2 rounded-full block mt-5 text-center`}>
                     {inventory?.stock > 10 ? "Available" : inventory?.stock <= 10 && inventory?.stock > 0 ? "Low Stock" : "Sold"}
                 </td>
                 <td className="text-center text-paragraph w-32">{getDate(inventory?.addedDate)}</td>
@@ -124,7 +124,7 @@ const Inventory = ({ inventory, handleDeleteInventory }) => {
                                 <div className="flex justify-between gap-5 text-paragraph mb-5">
                                     <label className="w-full" htmlFor="price">
                                         <h4 className="font-semibold text-lg mb-2">Price</h4>
-                                        <input defaultValue={inventory?.price} className="border w-full px-3 py-2" type="number" name="price" id="price" />
+                                        <input defaultValue={inventory?.price} className="border w-full px-3 py-2" type="text" name="price" id="price" />
                                     </label>
 
                                     <label className="w-full" htmlFor="picture">

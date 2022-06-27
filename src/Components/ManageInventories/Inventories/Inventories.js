@@ -10,9 +10,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Pagination from "../../Shared/Pagination/Pagination";
 import "./Inventory.css";
+import Spinner from "../../Shared/Spinner/Spinner";
 
 const Inventories = () => {
-    const [inventories, setInventories] = useGetData("https://easystock-server.herokuapp.com/inventories");
+    const [inventories, setInventories, loading] = useGetData("https://easystock-server.herokuapp.com/inventories");
     const [show, setShow] = useState(false);
     const [user] = useAuthState(auth);
     const [size, setSize] = useState(5);
@@ -91,11 +92,7 @@ const Inventories = () => {
                                     <th className="text-center text-md text-title">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {inventories.map((inventory) => (
-                                    <Inventory key={inventory._id} handleDeleteInventory={handleDeleteInventory} inventory={inventory} />
-                                ))}
-                            </tbody>
+                            <tbody className="relative">{loading ? <Spinner /> : inventories.map((inventory) => <Inventory key={inventory._id} handleDeleteInventory={handleDeleteInventory} inventory={inventory} />)}</tbody>
                         </table>
                     </div>
                 </div>
@@ -136,7 +133,7 @@ const Inventories = () => {
                                 <div className="flex justify-between gap-5 text-paragraph mb-5">
                                     <label className="w-full" htmlFor="price">
                                         <h4 className="font-semibold text-lg mb-2">Price</h4>
-                                        <input {...register("price", { required: true })} className="border w-full px-3 py-2" type="number" name="price" id="price" />
+                                        <input {...register("price", { required: true })} className="border w-full px-3 py-2" type="text" name="price" id="price" />
                                         {errors.supplier && <span>This field is required</span>}
                                     </label>
 

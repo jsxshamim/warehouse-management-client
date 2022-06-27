@@ -7,14 +7,17 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import auth from "../../Utilities/Firebase.init";
 import Inventory from "../ManageInventories/Inventory/Inventory";
+import Spinner from "../Shared/Spinner/Spinner";
 
 const MyInventories = () => {
     const [show, setShow] = useState(false);
     const [user] = useAuthState(auth);
+    const [loading, setLoading] = useState(false);
 
     const [inventories, setInventories] = useState([]);
 
     useEffect(() => {
+        setLoading(true);
         const API = `https://easystock-server.herokuapp.com/myInventories?email=${user?.email}`;
         const getInventories = async () => {
             try {
@@ -25,7 +28,9 @@ const MyInventories = () => {
                 });
 
                 setInventories(data);
+                setLoading(false);
             } catch (error) {
+                setLoading(false);
                 console.error(error.message);
             }
         };
@@ -98,11 +103,7 @@ const MyInventories = () => {
                                     <th className="text-center text-md text-title pr-8">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {inventories.map((inventory) => (
-                                    <Inventory key={inventory._id} handleDeleteInventory={handleDeleteInventory} inventory={inventory} />
-                                ))}
-                            </tbody>
+                            <tbody className="relative">{loading ? <Spinner /> : inventories.map((inventory) => <Inventory key={inventory._id} loading={loading} handleDeleteInventory={handleDeleteInventory} inventory={inventory} />)}</tbody>
                         </table>
                     </div>
                 </div>
@@ -143,7 +144,7 @@ const MyInventories = () => {
                                 <div className="flex justify-between gap-5 text-paragraph mb-5">
                                     <label className="w-full" htmlFor="price">
                                         <h4 className="font-semibold text-lg mb-2">Price</h4>
-                                        <input {...register("price", { required: true })} className="border w-full px-3 py-2" type="number" name="price" id="price" />
+                                        <input {...register("price", { required: true })} className="border w-full px-3 py-2" type="text" name="price" id="price" />
                                         {errors.supplier && <span>This field is required</span>}
                                     </label>
 
