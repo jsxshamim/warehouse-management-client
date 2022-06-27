@@ -15,7 +15,7 @@ const MyInventories = () => {
     const [inventories, setInventories] = useState([]);
 
     useEffect(() => {
-        const API = `http://localhost:5000/myInventories?email=${user?.email}`;
+        const API = `https://easystock-server.herokuapp.com/myInventories?email=${user?.email}`;
         const getInventories = async () => {
             try {
                 const { data } = await axios.get(API, {
@@ -42,7 +42,7 @@ const MyInventories = () => {
     const handleAddInventory = async (data) => {
         const newInventory = { ...data, addedDate: new Date() };
 
-        const API = "http://localhost:5000/inventory";
+        const API = "https://easystock-server.herokuapp.com/inventory";
         try {
             await axios.post(API, newInventory);
 
@@ -60,7 +60,7 @@ const MyInventories = () => {
         if (confirmed) {
             const remaining = inventories.filter((inventory) => inventory._id !== id);
             setInventories(remaining);
-            const API = `http://localhost:5000/inventory/${id}`;
+            const API = `https://easystock-server.herokuapp.com/inventory/${id}`;
             axios.delete(API).then((res) => console.log(res.data));
         }
     };

@@ -6,7 +6,7 @@ import RecentInventory from "./RecentInventory";
 const RecentInventories = () => {
     const navigate = useNavigate();
 
-    const [inventories] = useGetData("http://localhost:5000/inventories");
+    const [inventories] = useGetData("https://easystock-server.herokuapp.com/inventories");
 
     return (
         <section className="container mx-auto py-20 shadow-lg">

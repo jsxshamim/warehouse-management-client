@@ -8,7 +8,7 @@ const Pagination = ({ setInventories, size }) => {
     const [page, setPage] = useState(0);
 
     useEffect(() => {
-        const url = `http://localhost:5000/inventories?page=${page}&size=${size}`;
+        const url = `https://easystock-server.herokuapp.com/inventories?page=${page}&size=${size}`;
         fetch(url)
             .then((res) => res.json())
             .then((data) => {
@@ -17,7 +17,7 @@ const Pagination = ({ setInventories, size }) => {
     }, [page, setInventories, size]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/numberOfItems")
+        fetch("https://easystock-server.herokuapp.com/numberOfItems")
             .then((res) => res.json())
             .then((data) => {
                 const numberOfPage = data.count / size;
@@ -29,7 +29,7 @@ const Pagination = ({ setInventories, size }) => {
         <>
             <div class="bg-white flex items-center justify-between">
                 <div class="flex-1 flex justify-between sm:hidden">
-                    <button onClick={() => setPage(page - 1)} class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    <button disabled={page === 0 ? true : false} onClick={() => setPage(page - 1)} class={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50`}>
                         {" "}
                         Previous{" "}
                     </button>
@@ -40,7 +40,11 @@ const Pagination = ({ setInventories, size }) => {
                 </div>
                 <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                     <nav class="relative z-0 inline-flex rounded-md shadow-sm" aria-label="Pagination">
-                        <button onClick={() => setPage(page - 1)} class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        <button
+                            disabled={page === 0 ? true : false}
+                            onClick={() => setPage(page - 1)}
+                            class={`disabled:bg-secondary/50  disabled:cursor-not-allowed relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-secondary text-sm font-medium text-white `}
+                        >
                             <span class="sr-only">Previous</span>
 
                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -58,7 +62,7 @@ const Pagination = ({ setInventories, size }) => {
                                 {number + 1}
                             </button>
                         ))}
-                        <button onClick={() => setPage(page + 1)} class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        <button onClick={() => setPage(page + 1)} class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-secondary text-sm font-medium text-white ">
                             <span class="sr-only">Next</span>
 
                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

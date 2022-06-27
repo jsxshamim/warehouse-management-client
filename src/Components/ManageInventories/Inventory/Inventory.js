@@ -26,7 +26,7 @@ const Inventory = ({ inventory, handleDeleteInventory }) => {
             addedDate: new Date(),
         };
 
-        const API = `http://localhost:5000/inventory/${inventory._id}`;
+        const API = `https://easystock-server.herokuapp.com/inventory/${inventory._id}`;
 
         fetch(API, {
             method: "PUT",

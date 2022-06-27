@@ -12,7 +12,7 @@ import Pagination from "../../Shared/Pagination/Pagination";
 import "./Inventory.css";
 
 const Inventories = () => {
-    const [inventories, setInventories] = useGetData("http://localhost:5000/inventories");
+    const [inventories, setInventories] = useGetData("https://easystock-server.herokuapp.com/inventories");
     const [show, setShow] = useState(false);
     const [user] = useAuthState(auth);
     const [size, setSize] = useState(5);
@@ -27,7 +27,7 @@ const Inventories = () => {
     const handleAddInventory = async (data) => {
         const newInventory = { ...data, addedDate: new Date() };
 
-        const API = "http://localhost:5000/inventory";
+        const API = "https://easystock-server.herokuapp.com/inventory";
         try {
             await axios.post(API, newInventory);
 
@@ -45,7 +45,7 @@ const Inventories = () => {
         if (confirmed) {
             const remaining = inventories.filter((inventory) => inventory._id !== id);
             setInventories(remaining);
-            const API = `http://localhost:5000/inventory/${id}`;
+            const API = `https://easystock-server.herokuapp.com/inventory/${id}`;
             axios.delete(API).then((res) => console.log(res.data));
         }
     };

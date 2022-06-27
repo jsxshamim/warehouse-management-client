@@ -10,7 +10,7 @@ const InventoryDetails = () => {
     const [success, setSuccess] = useState(false);
 
     const handleUpdateStock = (id, newStock) => {
-        const API = `http://localhost:5000/update-stock/${id}`;
+        const API = `https://easystock-server.herokuapp.com/update-stock/${id}`;
 
         fetch(API, {
             method: "PUT",

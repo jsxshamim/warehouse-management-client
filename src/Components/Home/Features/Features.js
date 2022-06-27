@@ -4,7 +4,7 @@ import Feature from "./Feature";
 import "./Features.css";
 
 const Features = () => {
-    const [features] = useGetData("http://localhost:5000/features");
+    const [features] = useGetData("https://easystock-server.herokuapp.com/features");
 
     return (
         <section id="features" className="container mx-auto py-20 bg-gray-50">

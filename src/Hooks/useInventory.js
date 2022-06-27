@@ -8,7 +8,7 @@ const useInventory = (inventoryID) => {
     useEffect(() => {
         const getInventory = async () => {
             try {
-                const API = `http://localhost:5000/inventory/${inventoryID}`;
+                const API = `https://easystock-server.herokuapp.com/inventory/${inventoryID}`;
                 const { data } = await axios.get(API);
                 setInventory(data);
                 setStock(data.stock);
