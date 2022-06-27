@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import useInventories from "../../../Hooks/useInventories";
+import useGetData from "../../../Hooks/useGetData";
 import "./RecentInventories.css";
 import RecentInventory from "./RecentInventory";
 
 const RecentInventories = () => {
     const navigate = useNavigate();
 
-    const { inventories } = useInventories("http://localhost:5000/inventories");
+    const [inventories] = useGetData("http://localhost:5000/inventories");
 
     return (
         <section className="container mx-auto py-20 shadow-lg">
@@ -14,7 +14,7 @@ const RecentInventories = () => {
                 <h1 className="text-4xl font-bold text-title section-title">Recent Inventories</h1>
             </div>
 
-            <div className="inventories grid grid-cols-3 gap-10 mb-14">
+            <div className="inventories grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mb-14 px-5">
                 {inventories.slice(0, 6).map((inventory) => (
                     <RecentInventory key={inventory._id} inventory={inventory} />
                 ))}

@@ -21,7 +21,7 @@ const RecentInventory = ({ inventory }) => {
                     </div>
                 </div>
                 <div className="pl-10 pb-10">
-                    <p className="text-paragraph pb-2 pr-5">{description}</p>
+                    <p className="text-paragraph pb-2 pr-5">{description.slice(0, 80)}...</p>
                     <h4 className="text-title text-3xl font-bold pt-4 pb-8">${price}</h4>
                 </div>
             </div>

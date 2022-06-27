@@ -32,9 +32,9 @@ const Testimonials = () => {
             </div>
             <Slider {...settings}>
                 <div>
-                    <div className="flex justify-center items-center gap-10 w-10/12 mx-auto">
+                    <div className="flex lg:flex-row flex-col justify-center items-center gap-10 w-10/12 mx-auto">
                         <img className="w-56 h-56 rounded-full object-cover" src={"https://i.postimg.cc/76N7cp9Y/img1.jpg"} alt="" />
-                        <div className="testimonial-text py-20">
+                        <div className="testimonial-text lg:py-20 text-center lg:text-left">
                             <p className="text-2xl mb-5">
                                 Keep up the excellent work. I just can't get enough of Inventory Management. I want to get a T-Shirt with Inventory Management on it so I can show it off to everyone. I just can't get enough of Inventory Management.
                             </p>
@@ -44,9 +44,9 @@ const Testimonials = () => {
                     </div>
                 </div>
                 <div>
-                    <div className="flex justify-center items-center gap-10 w-10/12 mx-auto">
+                    <div className="flex lg:flex-row flex-col justify-center items-center gap-10 w-10/12 mx-auto">
                         <img className="w-56 h-56 rounded-full object-cover" src={"https://i.postimg.cc/76N7cp9Y/img1.jpg"} alt="" />
-                        <div className="testimonial-text py-20">
+                        <div className="testimonial-text lg:py-20 text-center lg:text-left">
                             <p className="text-2xl mb-5">
                                 Keep up the excellent work. I just can't get enough of Inventory Management. I want to get a T-Shirt with Inventory Management on it so I can show it off to everyone. I just can't get enough of Inventory Management.
                             </p>

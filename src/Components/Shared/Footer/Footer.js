@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGithub, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
 import FooterBG from "../../../Images/footer-bg.png";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
     return (
@@ -75,7 +76,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="mt-12 flex border-t pt-10 xl:justify-between xl:flex-row flex-col-reverse items-center xl:items-start w-full ">
-                        <p className="mt-10 md:mt-12 xl:mt-0 text-sm leading-none text-white">2020 The Good Company. All Rights Reserved</p>
+                        <p className="mt-10 md:mt-12 xl:mt-0 text-sm leading-none text-white">{new Date().getFullYear()} easyStock. All Rights Reserved</p>
                         <div className="mt-10 md:mt-12 xl:mt-0 md:flex-row flex-col flex md:justify-center w-full md:w-auto justify-start items-start space-y-4 md:space-y-0 md:items-center md:space-x-4 xl:space-x-6">
                             <Link to="/" className="text-base leading-none text-white hover:text-gray-300">
                                 Terms of service
@@ -91,17 +92,20 @@ const Footer = () => {
                             </Link>
                         </div>
                         <div className="flex  justify-start md:justify-end items-start  w-full md:w-auto md:items-center space-x-6 ">
+                            <a href="https://shamimreza.me" className="text-white hover:text-gray-200 ">
+                                <FontAwesomeIcon className="w-6 h-6" icon={faGlobe} />
+                            </a>
                             <a href="https://github.com/wpshamim" className="text-white hover:text-gray-200 ">
                                 <FontAwesomeIcon className="w-6 h-6" icon={faGithub} />
                             </a>
 
-                            <a href="https://github.com/wpshamim" className="text-white hover:text-gray-200 ">
+                            <a href="https://twitter.com/wpshamim" className="text-white hover:text-gray-200 ">
                                 <FontAwesomeIcon className="w-6 h-6" icon={faTwitter} />
                             </a>
-                            <a href="https://github.com/wpshamim" className="text-white hover:text-gray-200 ">
+                            <a href="https://www.facebook.com/shamimreza.dev/" className="text-white hover:text-gray-200 ">
                                 <FontAwesomeIcon className="w-6 h-6" icon={faFacebook} />
                             </a>
-                            <a href="https://github.com/wpshamim" className="text-white hover:text-gray-200 ">
+                            <a href="https://www.linkedin.com/in/wpshamim/" className="text-white hover:text-gray-200 ">
                                 <FontAwesomeIcon className="w-6 h-6" icon={faLinkedin} />
                             </a>
                         </div>

@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 
 const Banner = () => {
     return (
-        <section className="banner pt-20 flex items-center">
-            <div className="banner-content py-32 container mx-auto">
-                <div className="w-6/12 lg:w-[650px]">
-                    <h1 className="text-5xl font-bold text-title mb-5 leading-snug">Inventory Management Software in the Cloud</h1>
-                    <p className="text-xl text-paragraph">Simple to use, beautifully designed, customizable inventory software system for any business buying and selling goods.</p>
+        <section className="banner bg-contain pt-20 flex items-center">
+            <div className="banner-content py-32 container mx-auto md:px-32 px-10">
+                <div className="md:w-10/12 lg:w-10/12 xl:w-[650px]">
+                    <h1 className="text-5xl font-bold text-white mb-5 leading-snug">Inventory Management Software in the Cloud</h1>
+                    <p className="text-xl text-gray-300">Simple to use, beautifully designed, customizable inventory software system for any business buying and selling goods.</p>
                 </div>
-                <div className="btn pt-14">
+                <div className="btn pt-14 flex sm:flex-row flex-col gap-5">
                     <Link to="/signup" className="bg-secondary text-white text-xl font-semibold px-10 py-4 rounded mr-5">
                         Try easyStock For Free
                     </Link>

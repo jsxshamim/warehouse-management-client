@@ -1,4 +1,4 @@
-import useInventories from "../../../Hooks/useInventories";
+import useGetData from "../../../Hooks/useGetData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Inventory from "../Inventory/Inventory";
@@ -9,11 +9,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Pagination from "../../Shared/Pagination/Pagination";
+import "./Inventory.css";
 
 const Inventories = () => {
-    const { inventories, setInventories } = useInventories();
+    const [inventories, setInventories] = useGetData("http://localhost:5000/inventories");
     const [show, setShow] = useState(false);
-    const [user, loading] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const [size, setSize] = useState(5);
 
     const {
@@ -28,7 +29,7 @@ const Inventories = () => {
 
         const API = "http://localhost:5000/inventory";
         try {
-            const response = await axios.post(API, newInventory);
+            await axios.post(API, newInventory);
 
             reset();
             setShow(false);
@@ -50,31 +51,33 @@ const Inventories = () => {
     };
 
     return (
-        <section className="container mx-auto pt-24">
+        <section className="lg:container mx-auto pt-24 px-5">
             <div className="py-20">
                 <div className="section-top text-center pb-10">
                     <h1 className="text-4xl font-bold text-title section-title mb-5">Manage All Inventory Items</h1>
                 </div>
                 <div className=" bg-white shadow rounded">
-                    <div className="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start w-full">
-                        <div className="flex items-center gap-2 ">
-                            Show
-                            <select className="relative inline-flex items-center px-4 py-2 border text-sm font-medium" onChange={(e) => setSize(e.target.value)} name="page" id="page">
-                                <option defaultValue="5">5</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                            </select>
+                    <div className="flex flex-col md:flex-row gap-5 p-4 lg:p-8 justify-between w-full">
+                        <div className="flex justify-between md:w-1/2 order-2 md:order-1 ">
+                            <div className="flex items-center gap-2">
+                                Show
+                                <select className="relative inline-flex items-center px-4 py-2 border text-sm font-medium" onChange={(e) => setSize(e.target.value)} name="page" id="page">
+                                    <option defaultValue="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                </select>
+                            </div>
+
+                            <Pagination size={size} setInventories={setInventories} />
                         </div>
 
-                        <Pagination size={size} setInventories={setInventories} />
-
-                        <button onClick={() => setShow(true)} className="rounded flex gap-3 bg-secondary text-white px-5 py-2 items-center text-md">
+                        <button onClick={() => setShow(true)} className="order-1 md:order-2 rounded flex gap-3 bg-secondary text-white px-5 py-2 items-center text-md md:w-auto w-48">
                             <FontAwesomeIcon className="text-white" icon={faPlus} /> New Inventory
                         </button>
                     </div>
 
                     <div className="w-full">
-                        <table className="min-w-full bg-white dark:bg-gray-800">
+                        <table className="min-w-full bg-white">
                             <thead>
                                 <tr className="w-full h-16 border-gray-300  border-b py-8">
                                     <th className="pl-8 text-left text-md text-title">#SKU</th>
@@ -83,9 +86,9 @@ const Inventories = () => {
                                     <th className="text-left text-md text-title">Price</th>
                                     <th className="text-center text-md text-title">Stock</th>
                                     <th className="text-center text-md text-title">Supplier</th>
-                                    <th className="text-left text-md text-title">Status</th>
+                                    <th className="text-center text-md text-title">Status</th>
                                     <th className="text-center text-md text-title">Date Added</th>
-                                    <th className="text-left text-md text-title pr-8">Action</th>
+                                    <th className="text-center text-md text-title">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

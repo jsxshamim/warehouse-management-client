@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useAuthState } from "react-firebase-hooks/auth";
 import axios from "axios";
 import { toast } from "react-toastify";
-import useInventories from "../../Hooks/useInventories";
 import auth from "../../Utilities/Firebase.init";
 import Inventory from "../ManageInventories/Inventory/Inventory";
 
@@ -74,12 +73,7 @@ const MyInventories = () => {
                 </div>
                 <div className=" bg-white shadow rounded">
                     <div className="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full">
-                        <div className="w-full lg:w-1/3 flex flex-col lg:flex-row items-start lg:items-center">
-                            <p className="text-base text-gray-600" id="page-view">
-                                Viewing 1 - 20 of 60
-                            </p>
-                        </div>
-                        <div className="w-full lg:w-2/3 flex flex-col lg:flex-row items-start lg:items-center justify-end">
+                        <div className="w-full lg:w-3/3 flex flex-col lg:flex-row items-start lg:items-center justify-end">
                             <div className="lg:ml-6 flex items-center">
                                 <button onClick={() => setShow(true)} className="rounded flex gap-3 bg-secondary text-white px-5 py-2 items-center text-md">
                                     {" "}

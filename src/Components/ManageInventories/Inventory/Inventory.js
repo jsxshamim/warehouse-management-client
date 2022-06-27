@@ -48,8 +48,8 @@ const Inventory = ({ inventory, handleDeleteInventory }) => {
     return (
         <>
             <tr className="h-20 border-gray-300 border-b">
-                <td className="px-8 text-left text-paragraph w-24">#{inventory?._id.replace(/[^0-9]/g, "").slice(-4)}</td>
-                <td className="pr-6 w-72">
+                <td className="lg:px-8 px-3 text-left text-paragraph w-24">#{inventory?._id.replace(/[^0-9]/g, "").slice(-4)}</td>
+                <td className="pr-6 lg:w-72">
                     <div className="flex items-center">
                         <div className="h-16 w-16 border p-1">
                             <img src={inventory?.picture} alt="" className="h-full w-full overflow-hidden shadow" />
@@ -64,12 +64,12 @@ const Inventory = ({ inventory, handleDeleteInventory }) => {
                 <td className="text-left text-paragraph">${inventory?.price}</td>
                 <td className="text-center text-paragraph">{inventory?.stock}</td>
                 <td className="text-center text-paragraph">{inventory?.supplier}</td>
-                <td className={`${inventory?.stock > 10 ? "bg-green-400 text-paragraph" : inventory?.stock <= 10 && inventory?.stock > 0 ? "bg-yellow-400 text-gray-900" : "bg-red-400 text-white"} w-24 rounded-full block mt-7 text-center`}>
+                <td className={`${inventory?.stock > 10 ? "bg-green-400 text-paragraph" : inventory?.stock <= 10 && inventory?.stock > 0 ? "bg-yellow-400 text-gray-900" : "bg-red-400 text-white"} mx-2 rounded-full block mt-7 text-center`}>
                     {inventory?.stock > 10 ? "Available" : inventory?.stock <= 10 && inventory?.stock > 0 ? "Low Stock" : "Sold"}
                 </td>
                 <td className="text-center text-paragraph w-32">{getDate(inventory?.addedDate)}</td>
 
-                <td className="pr-8 relative text-center w-20">
+                <td className="relative text-center w-20">
                     <div className={`dropdown-content mt-8 absolute left-0 -ml-12 shadow-md z-10 ${!show ? "hidden" : ""} w-32`}>
                         <ul className="bg-white shadow rounded py-1 text-left">
                             <li

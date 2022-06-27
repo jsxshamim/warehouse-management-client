@@ -10,9 +10,9 @@ const Pricing = () => {
                 <p>Choose one of the plans that suits you. You will get a better service with the upgraded package.</p>
             </div>
 
-            <div className="flex flex-wrap -mx-4">
+            <div className="flex flex-wrap -mx-4 px-5">
                 <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8 lg:mb-0">
-                    <div className="p-8 bg-white shadow rounded border-0 cursor-pointer">
+                    <div className="p-8 bg-white shadow-lg rounded border-0 cursor-pointer">
                         <h4 className="mb-2 text-2xl font-bold font-heading">Beginner</h4> <span className="text-6xl font-bold">Free</span>
                         <p className="mt-3 mb-6 text-gray-500 leading-loose">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
                         <ul className="mb-6 text-gray-500">
@@ -43,7 +43,7 @@ const Pricing = () => {
                     </div>
                 </div>
                 <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8 lg:mb-0">
-                    <div className="p-8 bg-secondary shadow rounded">
+                    <div className="p-8 bg-secondary shadow-lg rounded">
                         <h4 className="mb-2 text-2xl font-bold text-white" data-config-id="02_title">
                             Intermediate
                         </h4>{" "}
@@ -84,7 +84,7 @@ const Pricing = () => {
                     </div>
                 </div>
                 <div className="w-full lg:w-1/3 px-4">
-                    <div className="p-8 bg-white shadow rounded">
+                    <div className="p-8 bg-white shadow-lg rounded">
                         <h4 className="mb-2 text-2xl font-bold font-heading" data-config-id="03_title">
                             Professional
                         </h4>{" "}
