@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGoogle, useUpdateProfile } from "react-firebase-hooks/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
@@ -9,12 +9,14 @@ import { useForm } from "react-hook-form";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import ProfilePic from "../../../Images/profile_av.svg";
 import { toast } from "react-toastify";
+import useToken from "../../../Hooks/useToken";
 
 const Signup = () => {
     const [showPass, setShowPass] = useState(false);
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile] = useUpdateProfile(auth);
     const [signInWithGoogle, googleUser, , googleError] = useSignInWithGoogle(auth);
+    const [signInWithFacebook, facebookUser, , facebookError] = useSignInWithFacebook(auth);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -27,6 +29,8 @@ const Signup = () => {
         formState: { errors },
     } = useForm();
 
+    const { token } = useToken(user || googleUser || facebookUser);
+
     const handleCreateAccount = async (data) => {
         const { name, email, password } = data;
         if (data) {
@@ -36,10 +40,11 @@ const Signup = () => {
         }
     };
 
-    if (error || googleError) {
+    if (error || googleError || facebookError) {
         toast.error(error.message);
     }
-    if (user || googleUser) {
+
+    if (token) {
         navigate(from, { replace: true });
         toast.success("Your have logged in your account");
     }
@@ -129,7 +134,8 @@ const Signup = () => {
                         </svg>
                         <p className="text-base font-medium ml-4 text-gray-700">Continue with Google</p>
                     </button>
-                    <button className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 p-3 border rounded-lg border-gray-700 flex items-center w-full mt-4 hover:bg-gray-100">
+
+                    <button onClick={() => signInWithFacebook()} className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 p-3 border rounded-lg border-gray-700 flex items-center w-full mt-4 hover:bg-gray-100">
                         <FontAwesomeIcon className="text-[#4267B2]" icon={faFacebookF} />
                         <p className="text-base font-medium ml-4 text-gray-700">Continue with Facebook</p>
                     </button>

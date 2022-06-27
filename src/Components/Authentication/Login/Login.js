@@ -42,6 +42,7 @@ const Login = () => {
 
     if (token) {
         navigate(from, { replace: true });
+        toast.success("Your have logged in your account");
     }
 
     return (
