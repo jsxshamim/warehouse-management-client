@@ -10,9 +10,11 @@ const useToken = (user) => {
             const email = user?.user?.email;
             if (email) {
                 const { data } = await axios.post("https://easystock-server.herokuapp.com/login", { email });
-                const accessToken = data?.token;
-                localStorage.setItem("access-token", accessToken);
-                setToken(accessToken);
+
+                if (data?.token) {
+                    localStorage.setItem("access-token", data?.token);
+                    setToken(data?.token);
+                }
             }
         };
         getData();

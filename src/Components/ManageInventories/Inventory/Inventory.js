@@ -11,7 +11,6 @@ const Inventory = ({ inventory, handleDeleteInventory }) => {
     const [show, setShow] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [user] = useAuthState(auth);
-
     const handleUpdateInventory = async (e) => {
         e.preventDefault();
 
@@ -151,6 +150,8 @@ const Inventory = ({ inventory, handleDeleteInventory }) => {
                     </div>
                 </div>
             )}
+
+            {/* <h4 className="text-3xl text-center">{inventory?.message}</h4> */}
         </>
     );
 };

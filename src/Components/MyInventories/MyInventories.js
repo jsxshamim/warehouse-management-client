@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import auth from "../../Utilities/Firebase.init";
 import Inventory from "../ManageInventories/Inventory/Inventory";
 import Spinner from "../Shared/Spinner/Spinner";
+import { signOut } from "firebase/auth";
 
 const MyInventories = () => {
     const [show, setShow] = useState(false);
@@ -30,8 +31,10 @@ const MyInventories = () => {
                 setInventories(data);
                 setLoading(false);
             } catch (error) {
-                setLoading(false);
-                console.error(error.message);
+                console.error(error);
+                if (error.response.status === 403 || error.response.status === 401) {
+                    signOut(auth);
+                }
             }
         };
         getInventories();

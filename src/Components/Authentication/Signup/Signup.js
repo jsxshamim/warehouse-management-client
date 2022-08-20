@@ -12,16 +12,21 @@ import { toast } from "react-toastify";
 import useToken from "../../../Hooks/useToken";
 
 const Signup = () => {
+    // show hide password
     const [showPass, setShowPass] = useState(false);
+
+    // react firebase auth hooks
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile] = useUpdateProfile(auth);
     const [signInWithGoogle, googleUser, , googleError] = useSignInWithGoogle(auth);
     const [signInWithFacebook, facebookUser, , facebookError] = useSignInWithFacebook(auth);
 
+    // for navigate where the user came from
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/";
 
+    // react hook form
     const {
         register,
         handleSubmit,
@@ -29,6 +34,7 @@ const Signup = () => {
         formState: { errors },
     } = useForm();
 
+    // use token custom hook
     const { token } = useToken(user || googleUser || facebookUser);
 
     const handleCreateAccount = async (data) => {
@@ -40,10 +46,12 @@ const Signup = () => {
         }
     };
 
+    // when getting errors
     if (error || googleError || facebookError) {
         toast.error(error.message);
     }
 
+    // when token will generated
     if (token) {
         navigate(from, { replace: true });
         toast.success("Your have logged in your account");

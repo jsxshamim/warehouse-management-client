@@ -32,13 +32,13 @@ const InventoryDetails = () => {
                 ) : (
                     <>
                         <h1 className="text-4xl font-bold text-center my-10">Inventory Product Details</h1>
-                        <div className="grid grid-cols-2 gap-20">
+                        <div className="grid md:grid-cols-2 md:gap-20">
                             <div className="product-details relative">
                                 <h2 className="text-3xl font-bold mb-5">{name}</h2>
                                 <img className="w-full" src={picture} alt="" />
 
                                 <span
-                                    className={`text-gray-800 shadow-lg font-bold absolute top-8 right-[-20px] ${
+                                    className={`text-gray-800 shadow-lg font-bold absolute top-12 sm:top-8 right-[0] sm:right-[-20px] ${
                                         stock > 10 ? "bg-green-400" : stock <= 10 && stock > 0 ? "bg-yellow-400" : "bg-red-400"
                                     } w-24 h-24 rounded-full flex items-center justify-center`}
                                 >
