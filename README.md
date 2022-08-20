@@ -4,7 +4,7 @@ Live Site [https://easystock-bd.web.app](https://easystock-bd.web.app).
 
 ## Features & Functionalities
 
--   Require Sign up/Login for Managing Inventory.
+-   Require Signup/Login for Managing Inventory.
 -   Only Verified user can Manage Inventory.
 -   User can Add / Update / Delete Inventory Item.
 -   Every User will have "My Inventory" Section. Can see only their own Items.
